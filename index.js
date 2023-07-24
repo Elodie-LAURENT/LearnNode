@@ -5,7 +5,7 @@ const employees = require('./Employees');
 app.use(express.json());
 
 //setting up the route
-app.use('/api/employees', require('./routes/api'))
+app.use('/api/employees', require('./routes/api/employees'))
 
 const PORT = process.env.PORT || 4000; //in dev
 

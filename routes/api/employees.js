@@ -37,4 +37,22 @@ router.post ('/', (req, res) => {
     res.json(employees);
 });
 
+//update employee list
+
+router.put('/:name', (req, res) => {
+    const checkExists = employees.some(employee => employee.name === req.params.name);
+
+    if(checkExists) {
+        const updateEmployee = req.body;
+            employees.forEach(employee => {
+                if(employee.name === req.params.name) {
+                    employee.name = updateEmployee ? updateEmployee.name : employee.name;
+                    res.json({msg: `Employee updated`, employee});
+                }
+            })
+                } else {
+                    res.status(400).json({msg: `Employee ${req.params.name} doesn't exist`}); 
+                }
+})
+
 module.exports = router;
