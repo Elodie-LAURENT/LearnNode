@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
+const employees = require('../../Employees');
 
 //retreive all employee
-app.get('/api/employees', (req, res) => {
+router.get('/', (req, res) => {
     res.json(employees);
 })
 
 //retreive single employee
-app.get('/api/employees/:name', (req, res) => {
+router.get('/:name', (req, res) => {
     const checkExists = employees.some(employee => employee.name === req.params.name);
     if(checkExists) {
     res.json(employees.filter(employee => employee.name === req.params.name));
@@ -19,7 +21,7 @@ app.get('/api/employees/:name', (req, res) => {
 
 //create employee
 
-app.post ('/api/employees', (req, res) => {
+router.post ('/', (req, res) => {
     const newEmployee = {
         name: req.body.name,
         email: req.body.email,
@@ -33,4 +35,6 @@ app.post ('/api/employees', (req, res) => {
 
     employees.push(newEmployee);
     res.json(employees);
-})
+});
+
+module.exports = router;
