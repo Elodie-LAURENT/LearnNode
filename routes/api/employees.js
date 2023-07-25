@@ -53,6 +53,18 @@ router.put('/:name', (req, res) => {
                 } else {
                     res.status(400).json({msg: `Employee ${req.params.name} doesn't exist`}); 
                 }
+});
+
+router.delete('/:name', (req, res) => {
+    const checkExists = employees.some(employee => employee.name === req.params.name);
+
+    if(checkExists) {
+        res.json({
+            msg: 'Employee deleted',
+            employees: employees.filter(employee => employee.name !== req.params.name)});
+                } else {
+                    res.status(400).json({msg: `Employee ${req.params.name} doesn't exist`}); 
+                }
 })
 
 module.exports = router;
